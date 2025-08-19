@@ -1,7 +1,13 @@
+import { IsEmail, IsNotEmpty } from 'class-validator';
+
 export class CreateGuestDto {
   name: string;
-  email?: string;
   phone?: string;
-  whatsapp?: string;
   telegram?: string;
+
+  @IsEmail()
+  email?: string;
+
+  @IsNotEmpty()
+  event: string;
 }

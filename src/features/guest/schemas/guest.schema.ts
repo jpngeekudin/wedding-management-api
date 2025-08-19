@@ -1,25 +1,25 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
+import { Event } from '../../event/schemas/event.schema';
 
 export type GuestDocument = Guest & Document;
 
 @Schema()
 export class Guest {
-
   @Prop({ required: true })
   name: string;
 
-  @Prop({ default: '' })
+  @Prop()
   email: string;
 
-  @Prop({ default: '' })
+  @Prop()
   phone: string;
 
-  @Prop({ default: '' })
-  whatsapp: string;
-
-  @Prop({ default: '' })
+  @Prop()
   telegram: string;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Event' })
+  event: Event;
 }
 
 export const GuestSchema = SchemaFactory.createForClass(Guest);

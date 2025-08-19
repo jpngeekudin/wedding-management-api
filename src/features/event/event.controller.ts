@@ -16,7 +16,7 @@ export class EventController {
   @Post('create')
   async createEvent(@Body() body: CreateEventDto, @Res() response: Response) {
     if (!body.name) response.status(HttpStatus.BAD_GATEWAY).send();
-    let data = this.eventService.create(body);
+    let data = await this.eventService.create(body);
     return response.send({ success: true, data });
   }
 
