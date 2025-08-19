@@ -20,6 +20,9 @@ export class Guest {
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Event' })
   event: Event;
+
+  @Prop({ select: false })
+  __v: number;
 }
 
 export const GuestSchema = SchemaFactory.createForClass(Guest);

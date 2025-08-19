@@ -24,6 +24,9 @@ export class Event {
 
   @Prop({ default: Date.now() })
   createdAt: number;
+
+  @Prop({ select: false })
+  __v: number;
 }
 
 export type EventDocument = Event & Document;
