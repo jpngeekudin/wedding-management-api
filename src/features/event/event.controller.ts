@@ -1,12 +1,24 @@
-import { Body, Controller, Delete, Get, HttpStatus, Post, Query, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Post,
+  Query,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { CreateEventDto } from './dto/event.dto';
 import { EventService } from './event.service';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('event')
 export class EventController {
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService) {}
 
+  @UseGuards(AuthGuard)
   @Get('get')
   async getEvent() {
     let data = await this.eventService.findAll();

@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Res } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthLoginDto } from './dto/auth-login.dto';
 import { Response } from 'express';
@@ -7,14 +7,9 @@ import { Response } from 'express';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Post('login')
   async login(@Body() loginDto: AuthLoginDto, @Res() res: Response) {
-    try {
-      const data = await this.authService.login(loginDto);
-      res.send({ data, status: true });
-    } catch (err) {
-      res
-        .status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .send({ data: err, status: false });
-    }
+    const data = await this.authService.login(loginDto);
+    res.status(HttpStatus.OK).send({ data, status: true });
   }
 }

@@ -37,4 +37,8 @@ export class EventService {
     let objId = new Types.ObjectId(id);
     return this.eventModel.findOneAndDelete({ _id: objId });
   }
+
+  async empty() {
+    return this.eventModel.deleteMany({});
+  }
 }

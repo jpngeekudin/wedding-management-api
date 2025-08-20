@@ -6,7 +6,7 @@ import { Response } from 'express';
 export class SeedController {
   constructor(private seedService: SeedService) {}
 
-  @Post('seed')
+  @Post('')
   async seed(@Res() res: Response) {
     try {
       const data = await this.seedService.seed();

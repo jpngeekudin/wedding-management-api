@@ -1,12 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Res } from '@nestjs/common';
 import { EventService } from '../event/event.service';
-import moment from 'moment';
+import * as moment from 'moment';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class SeedService {
-  constructor(private readonly eventService: EventService) {}
+  constructor(
+    private readonly eventService: EventService,
+    private readonly userService: UserService,
+  ) {}
 
   async seed() {
+    await this.eventService.empty();
     const events = await this.eventService.createBulk(
       [
         { groom: 'Ujang', bride: 'Jokowati', daysToGo: 7 },
@@ -25,5 +30,12 @@ export class SeedService {
         endDate: moment().add(e.daysToGo, 'days').endOf('days').valueOf(),
       })),
     );
+
+    await this.userService.empty();
+    const users = await this.userService.createBulk([
+      { username: 'root', password: 'jaringan' },
+    ]);
+
+    return { events, users };
   }
 }
