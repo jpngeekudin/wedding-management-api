@@ -11,6 +11,7 @@ import { EventModule } from '../event/event.module';
     MongooseModule.forFeature([{ name: Guest.name, schema: GuestSchema }]),
     EventModule,
   ],
+  exports: [GuestService],
   providers: [GuestService],
   controllers: [GuestController],
 })

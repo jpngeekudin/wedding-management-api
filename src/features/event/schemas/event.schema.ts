@@ -22,6 +22,15 @@ export class Event {
   @Prop({ required: true })
   address: string;
 
+  @Prop({ required: true })
+  addressLng: number;
+
+  @Prop({ required: true })
+  addressLat: number;
+
+  @Prop({ required: true })
+  phone: string;
+
   @Prop({ default: Date.now() })
   createdAt: number;
 

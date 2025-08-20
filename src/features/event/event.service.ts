@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { CreateEventDto } from './dto/event.dto';
 import { Event, EventDocument } from './schemas/event.schema';
+import moment from 'moment';
 
 @Injectable()
 export class EventService {
@@ -26,6 +27,10 @@ export class EventService {
     } catch (err) {
       throw err;
     }
+  }
+
+  async createBulk(eventDtos: CreateEventDto[]) {
+    return this.eventModel.create(eventDtos);
   }
 
   async delete(id: string) {
