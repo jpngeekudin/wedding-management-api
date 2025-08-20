@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { UserCreateDto } from './dto/user-create.dto';
-import { encryptString } from 'src/helpers/security.helper';
+import { hashString } from 'src/helpers/security.helper';
 
 @Injectable()
 export class UserService {
@@ -22,12 +22,11 @@ export class UserService {
         throw `User with username ${userDto.username} already exists`;
     }
 
-    return this.userModel.create(
-      userDtos.map((dto) => ({
-        ...dto,
-        password: encryptString(dto.password),
-      })),
-    );
+    for (const dto of userDtos) {
+      dto.password = await hashString(dto.password);
+    }
+
+    return this.userModel.create(userDtos);
   }
 
   async empty() {
