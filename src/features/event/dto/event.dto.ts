@@ -22,6 +22,18 @@ export class CreateEventDto {
   })
   address: string;
 
+  @IsNotEmpty()
+  @ApiProperty({ default: 106.696203 })
+  addressLng: number;
+
+  @IsNotEmpty()
+  @ApiProperty({ default: -6.272331 })
+  addressLat: number;
+
+  @IsNotEmpty()
+  @ApiProperty()
+  phone: string;
+
   @ApiProperty({ default: moment().startOf('day').valueOf() })
   startDate?: number;
 
