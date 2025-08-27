@@ -7,6 +7,10 @@ import { EventModule } from './features/event/event.module';
 import { SeedModule } from './features/seed/seed.module';
 import { AuthModule } from './features/auth/auth.module';
 import { UserModule } from './features/user/user.module';
+import { InvitationModule } from './features/invitation/invitation.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import moment from 'moment';
 
 @Module({
   imports: [
@@ -15,7 +19,8 @@ import { UserModule } from './features/user/user.module';
     EventModule,
     SeedModule,
     AuthModule,
-    UserModule
+    UserModule,
+    InvitationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

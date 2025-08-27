@@ -18,7 +18,6 @@ import { AuthGuard } from '../auth/auth.guard';
 export class EventController {
   constructor(private eventService: EventService) {}
 
-  @UseGuards(AuthGuard)
   @Get('get')
   async getEvent() {
     let data = await this.eventService.findAll();
